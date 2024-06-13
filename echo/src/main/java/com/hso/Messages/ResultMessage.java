@@ -18,6 +18,10 @@ public final class ResultMessage implements Sendable, Receivable {
         this.storageSum = storageSum;
     }
 
+    public int getStorageSum() {
+        return this.storageSum;
+    }
+
     @Override
     public byte[] getMessage() {
         String request =
@@ -30,5 +34,10 @@ public final class ResultMessage implements Sendable, Receivable {
     @Override
     public Peer getReceiver() {
         return receiver;
+    }
+
+    @Override
+    public EMessageType getMessageType() {
+        return EMessageType.Result;
     }
 }

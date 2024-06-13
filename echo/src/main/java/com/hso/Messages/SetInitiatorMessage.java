@@ -25,4 +25,9 @@ public final class SetInitiatorMessage implements Sendable, Receivable {
     public Peer getReceiver() {
         return receiver;
     }
+
+    @Override
+    public EMessageType getMessageType() {
+        return EMessageType.SetInitiator;
+    }
 }

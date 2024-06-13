@@ -6,7 +6,10 @@ package com.hso.Messages;
 
 public enum EMessageType {
     Info,
-    Echo
+    Echo,
+    Log,
+    SetInitiator,
+    Result
     ;
     @Override
     public String toString() {
@@ -15,6 +18,12 @@ public enum EMessageType {
                 return "info";
             case 1:
                 return "echo";
+            case 2:
+                return "log";
+            case 3:
+                return "setInitiator";
+            case 4:
+                return "result";
             default:
                 return null;
         }

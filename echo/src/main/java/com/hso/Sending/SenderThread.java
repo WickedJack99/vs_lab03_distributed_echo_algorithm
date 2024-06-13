@@ -16,16 +16,17 @@ public class SenderThread extends Thread {
 
     private DatagramSocket ds = null;
     private SendingQueue sendingQueue = null;
+    private volatile boolean senderThreadRunning = false;
 
     public SenderThread(DatagramSocket ds, SendingQueue sendingQueue) {
         this.ds = ds;
         this.sendingQueue = sendingQueue;
     }
 
-    private boolean senderThreadRunning = true;
-
     @Override
     public void run() {
+        this.senderThreadRunning = true;
+
         while (senderThreadRunning) {
             try {
                 Sendable dataToSent = sendingQueue.take();

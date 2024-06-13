@@ -1,7 +1,11 @@
 package com.hso.Parser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.hso.AppInfo.AppInfo;
 import com.hso.AppInfo.EAppType;
+import com.hso.Peer.Peer;
 
 /**
  * @author Aaron Moser
@@ -23,11 +27,22 @@ public class CommandArgumentsParser {
     }
 
     private static AppInfo createControllerInfo(String[] args) {
-        return new AppInfo(EAppType.Controller);
+        Peer controllerNetworkInformation = new Peer(args[1]);
+        List<Peer> networkNodes = new ArrayList<Peer>(args.length - 2);
+        for (int i = 2; i < args.length; i++) {
+            networkNodes.add(new Peer(args[i]));
+        }
+        return new AppInfo(EAppType.Controller, null, controllerNetworkInformation, 0, networkNodes);
     }
 
     private static AppInfo createNodeInfo(String[] args) {
-        int direct_neighbors_count = args.length - 4;
-        return new AppInfo(EAppType.Node);
+        Peer nodeNetworkInformation = new Peer(args[1]);
+        int storage = Integer.valueOf(args[2]);
+        Peer controllerNetworkInformation = new Peer(args[3]);
+        List<Peer> networkNodes = new ArrayList<Peer>(args.length - 4);
+        for (int i = 4; i < args.length; i++) {
+            networkNodes.add(new Peer(args[i]));
+        }
+        return new AppInfo(EAppType.Node, nodeNetworkInformation, controllerNetworkInformation, storage, networkNodes);
     }
 }

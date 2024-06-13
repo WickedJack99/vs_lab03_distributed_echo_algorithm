@@ -24,6 +24,18 @@ public final class LogMessage implements Sendable, Receivable {
         this.messageType = messageType;
     }
 
+    public String getTimeStamp() {
+        return this.timestamp;
+    }
+
+    public Peer getStart() {
+        return this.start;
+    }
+
+    public Peer getTarget() {
+        return this.target;
+    }
+
     @Override
     public byte[] getMessage() {
         String request =
@@ -42,5 +54,10 @@ public final class LogMessage implements Sendable, Receivable {
     @Override
     public Peer getReceiver() {
         return receiver;
+    }
+
+    @Override
+    public EMessageType getMessageType() {
+        return EMessageType.Log;
     }
 }

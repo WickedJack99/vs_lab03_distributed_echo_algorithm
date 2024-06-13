@@ -14,6 +14,10 @@ public class Peer {
         this.port = port;
     }
 
+    /**
+     * Copy constructor.
+     * @param other
+     */
     public Peer(Peer other) {
         if (other != null) {
             this.ipAddress = other.ipAddress;
@@ -22,6 +26,16 @@ public class Peer {
             this.ipAddress = null;
             this.port = 0;
         }
+    }
+
+    public Peer(String ipPort) {
+        String[] ipPortArray = ipPort.split(":");
+        this.ipAddress = ipPortArray[0];
+        this.port = Integer.valueOf(ipPortArray[1]);
+    }
+
+    public static Peer empty() {
+        return new Peer("", -1);
     }
 
     public String getIPAddress() {

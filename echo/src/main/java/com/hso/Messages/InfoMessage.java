@@ -18,6 +18,10 @@ public final class InfoMessage implements Sendable, Receivable {
         this.parent = new Peer(parent);
     }
 
+    public Peer getParent() {
+        return this.parent;
+    }
+
     @Override
     public byte[] getMessage() {
         String request =
@@ -30,5 +34,10 @@ public final class InfoMessage implements Sendable, Receivable {
     @Override
     public Peer getReceiver() {
         return receiver;
+    }
+
+    @Override
+    public EMessageType getMessageType() {
+        return EMessageType.Info;
     }
 }
