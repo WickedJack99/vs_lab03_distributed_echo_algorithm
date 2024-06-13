@@ -28,11 +28,7 @@ public class CommandArgumentsParser {
 
     private static AppInfo createControllerInfo(String[] args) {
         Peer controllerNetworkInformation = new Peer(args[1]);
-        List<Peer> networkNodes = new ArrayList<Peer>(args.length - 2);
-        for (int i = 2; i < args.length; i++) {
-            networkNodes.add(new Peer(args[i]));
-        }
-        return new AppInfo(EAppType.Controller, null, controllerNetworkInformation, 0, networkNodes);
+        return new AppInfo(EAppType.Controller, null, controllerNetworkInformation, 0, null);
     }
 
     private static AppInfo createNodeInfo(String[] args) {
