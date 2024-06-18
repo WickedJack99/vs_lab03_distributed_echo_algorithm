@@ -16,11 +16,11 @@
             <version>20240303</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.jcraft/jsch -->
+        <!-- https://github.com/mwiede/jsch -->
         <dependency>
-            <groupId>com.jcraft</groupId>
+            <groupId>com.github.mwiede</groupId>
             <artifactId>jsch</artifactId>
-            <version>0.1.55</version>
+            <version>0.2.18</version>
         </dependency>
 
     </dependencies>
