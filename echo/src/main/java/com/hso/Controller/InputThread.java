@@ -30,7 +30,9 @@ public class InputThread extends Thread {
         }
         if ((inputString != null) && (!inputString.equals(""))) {
             sendingQueue.add(new SetInitiatorMessage(new Peer(inputString)));
+            System.out.println("-------------------------------------------------");
             System.out.println("Node at " + inputString + " was set as initiator node.");
+            System.out.println("-------------------------------------------------");
         }
         inputScanner.close();
     }

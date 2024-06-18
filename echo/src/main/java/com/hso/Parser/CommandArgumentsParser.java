@@ -20,6 +20,8 @@ public class CommandArgumentsParser {
             return createControllerInfo(args);
         } else if (mode.equals("node")) {
             return createNodeInfo(args);
+        } else if (mode.toLowerCase().equals("deployer")) {
+            return createDeployerInfo();
         } else {
             System.out.println("Error, unknown mode. Aborting.");
             return null;
@@ -28,7 +30,7 @@ public class CommandArgumentsParser {
 
     private static AppInfo createControllerInfo(String[] args) {
         Peer controllerNetworkInformation = new Peer(args[1]);
-        return new AppInfo(EAppType.Controller, null, controllerNetworkInformation, 0, null);
+        return new AppInfo(EAppType.Controller, null, controllerNetworkInformation, 0, null, args[2]);
     }
 
     private static AppInfo createNodeInfo(String[] args) {
@@ -39,6 +41,10 @@ public class CommandArgumentsParser {
         for (int i = 4; i < args.length; i++) {
             networkNodes.add(new Peer(args[i]));
         }
-        return new AppInfo(EAppType.Node, nodeNetworkInformation, controllerNetworkInformation, storage, networkNodes);
+        return new AppInfo(EAppType.Node, nodeNetworkInformation, controllerNetworkInformation, storage, networkNodes, null);
+    }
+
+    private static AppInfo createDeployerInfo() {
+        return new AppInfo(EAppType.Deployer, null, null, 0, null, null);
     }
 }

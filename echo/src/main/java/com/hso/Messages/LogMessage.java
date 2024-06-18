@@ -14,14 +14,16 @@ public final class LogMessage implements Sendable, Receivable {
     private final Peer start;
     private final Peer target;
     private final EMessageType messageType;
+    private final int storageSum;
 
-    public LogMessage(String timestamp, Peer start, Peer target, EMessageType messageType, Peer receiver) {
+    public LogMessage(String timestamp, Peer start, Peer target, EMessageType messageType, Peer receiver, int storageSum) {
         this.receiver = new Peer(receiver);
 
         this.timestamp = timestamp;
         this.start = new Peer(start);
         this.target = new Peer(target);
         this.messageType = messageType;
+        this.storageSum = storageSum;
     }
 
     public String getTimeStamp() {
@@ -36,6 +38,14 @@ public final class LogMessage implements Sendable, Receivable {
         return this.target;
     }
 
+    public EMessageType getReceivedMessageType() {
+        return this.messageType;
+    }
+
+    public int getStorageSum() {
+        return this.storageSum;
+    }
+
     @Override
     public byte[] getMessage() {
         String request =
@@ -47,7 +57,9 @@ public final class LogMessage implements Sendable, Receivable {
             "," + 
             "\"target\":\"" + target.getIPAddress() + ":" + target.getPort() + "\"" +
             "," + 
-            "\"receivedMessageType\":\"" + messageType.toString() + "\"}";
+            "\"receivedMessageType\":\"" + messageType.toString() + "\"" + 
+            "," +
+            "\"storageSum\":" + storageSum + "}";
         return request.getBytes();
     }
 

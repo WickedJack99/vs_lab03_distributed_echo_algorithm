@@ -2,6 +2,7 @@ package com.hso;
 
 import com.hso.AppInfo.AppInfo;
 import com.hso.Controller.ControllerApp;
+import com.hso.Deployer.DeployerApp;
 import com.hso.Node.NodeApp;
 import com.hso.Parser.CommandArgumentsParser;
 import com.hso.Receiving.ReceivingQueue;
@@ -37,6 +38,17 @@ public class Main {
                 try {
                     nodeApp.join();
                     System.out.println("Node app has stopped.");
+                } catch (InterruptedException e) {
+                    System.err.println(e);
+                }
+            }break;
+
+            case Deployer: {
+                DeployerApp deployerApp = new DeployerApp();
+                deployerApp.start();
+                try {
+                    deployerApp.join();
+                    System.out.println("Deployer app has stopped.");
                 } catch (InterruptedException e) {
                     System.err.println(e);
                 }

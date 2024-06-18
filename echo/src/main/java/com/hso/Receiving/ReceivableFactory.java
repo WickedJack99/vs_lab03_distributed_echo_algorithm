@@ -1,6 +1,5 @@
 package com.hso.Receiving;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.hso.Messages.EMessageType;
@@ -18,7 +17,8 @@ import com.hso.Peer.Peer;
 
 public class ReceivableFactory {
     public static Receivable createReceivableFromByteData(byte[] byteData) {
-        JSONObject receivedDataAsJSONObject = interpretAsJSONObject(byteData);
+        //System.out.println(data(byteData));
+        JSONObject receivedDataAsJSONObject = new JSONObject(data(byteData).toString());
         switch (receivedDataAsJSONObject.getString("messageType")) {
 
             case "info": {
@@ -27,7 +27,7 @@ public class ReceivableFactory {
             }
 
             case "echo": {
-                int storageSum = Integer.parseInt(receivedDataAsJSONObject.getString("storageSum"));
+                int storageSum = receivedDataAsJSONObject.getInt("storageSum");
                 Peer sender = new Peer(receivedDataAsJSONObject.getString("sender"));
                 return new EchoMessage(storageSum, sender, Peer.empty());
             }
@@ -36,9 +36,10 @@ public class ReceivableFactory {
                 String timestamp = receivedDataAsJSONObject.getString("timestamp");
                 Peer start = new Peer(receivedDataAsJSONObject.getString("start"));
                 Peer target = new Peer(receivedDataAsJSONObject.getString("target"));
+                int storageSum = receivedDataAsJSONObject.getInt("storageSum");
                 EMessageType messageType = 
                     parseMessageType(receivedDataAsJSONObject.getString("receivedMessageType"));
-                return new LogMessage(timestamp, start, target, messageType, Peer.empty());
+                return new LogMessage(timestamp, start, target, messageType, Peer.empty(), storageSum);
             }
 
             case "setInitiator": {
@@ -46,7 +47,7 @@ public class ReceivableFactory {
             }
 
             case "result": {
-                int storageSum = Integer.parseInt(receivedDataAsJSONObject.getString("storageSum"));
+                int storageSum = receivedDataAsJSONObject.getInt("storageSum");
                 return new ResultMessage(storageSum, Peer.empty());
             }
         
@@ -57,16 +58,22 @@ public class ReceivableFactory {
         return null;
     }
 
-    private static JSONObject interpretAsJSONObject(byte[] byteData) {
-        try {
-            JSONObject receivedDataAsJSONObject = null;
-            receivedDataAsJSONObject = new JSONObject(byteData);
-            return receivedDataAsJSONObject;
-        } catch (JSONException e) {
-            System.out.println(byteData);
-            System.err.println("File is a json file, not able to parse it.");
+    /**
+     * Source: https://www.geeksforgeeks.org/working-udp-datagramsockets-java/
+     * @param a the byte array to build a String out of it.
+     * @return a StringBuilder containing the data to build a String.
+     */
+    private static StringBuilder data(byte[] a) { 
+        if (a == null) {
+            return null;
         }
-        return null;
+        StringBuilder ret = new StringBuilder(); 
+        int i = 0; 
+        while (a[i] != 0) { 
+            ret.append((char) a[i]); 
+            i++; 
+        } 
+        return ret; 
     }
 
     private static EMessageType parseMessageType(String messageTypeString) {

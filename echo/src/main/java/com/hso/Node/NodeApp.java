@@ -41,6 +41,7 @@ public class NodeApp extends Thread {
         this.nodeAppInfo = appInfo;
         this.sendingQueue = sendingQueue;
         this.receivingQueue = receivingQueue;
+        this.storageSum = nodeAppInfo.getStorage();
     }
 
     public void run() {
@@ -48,6 +49,7 @@ public class NodeApp extends Thread {
         try {
             InetAddress ipAddress = InetAddress.getByName(nodeAppInfo.getNodeNetworkInformation().getIPAddress());
             int port = nodeAppInfo.getNodeNetworkInformation().getPort();
+            System.out.println(ipAddress + " " + port);
             DatagramSocket ds = new DatagramSocket(port, ipAddress);
             Receiver receiver = new Receiver(ds, receivingQueue);
             receiver.start();
@@ -93,6 +95,7 @@ public class NodeApp extends Thread {
         sendLogForInfoMessage(infoMessage);
         neighborsInformed++;
         if (!informed) {
+            informed = true;
             parent = infoMessage.getParent();
             for (Peer neighbor : nodeAppInfo.getNetworkNodes()) {
                 if (!neighbor.equals(parent)) {
@@ -114,7 +117,8 @@ public class NodeApp extends Thread {
                 infoMessage.getParent(), 
                 nodeAppInfo.getNodeNetworkInformation(), 
                 EMessageType.Info, 
-                nodeAppInfo.getControllerNetworkInformation()
+                nodeAppInfo.getControllerNetworkInformation(),
+                0
             )
         );
     }
@@ -140,7 +144,8 @@ public class NodeApp extends Thread {
                 echoMessage.getSender(), 
                 nodeAppInfo.getNodeNetworkInformation(), 
                 EMessageType.Echo, 
-                nodeAppInfo.getControllerNetworkInformation()
+                nodeAppInfo.getControllerNetworkInformation(),
+                echoMessage.getStorageSum()
             )
         );
     }

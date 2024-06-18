@@ -6,5 +6,6 @@ package com.hso.AppInfo;
 
 public enum EAppType {
     Controller,
-    Node
+    Node,
+    Deployer
 }

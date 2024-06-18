@@ -5,7 +5,7 @@
     "nodes" : [
         {
             "ipPort":"127.0.0.1:5000",
-            "storage":579,
+            "storage":1,
             "direct_neighbors":[
                 {
                     "ipPort":"127.0.0.1:5001"
@@ -20,7 +20,7 @@
         },
         {
             "ipPort":"127.0.0.1:5001",
-            "storage":471,
+            "storage":2,
             "direct_neighbors":[
                 {
                     "ipPort":"127.0.0.1:5000"
@@ -38,7 +38,7 @@
         },
         {
             "ipPort":"127.0.0.1:5002",
-            "storage":647,
+            "storage":3,
             "direct_neighbors":[
                 {
                     "ipPort":"127.0.0.1:5001"
@@ -56,7 +56,7 @@
         },
         {
             "ipPort":"127.0.0.1:5003",
-            "storage":626,
+            "storage":4,
             "direct_neighbors":[
                 {
                     "ipPort":"127.0.0.1:5000"
@@ -74,7 +74,7 @@
         },
         {
             "ipPort":"127.0.0.1:5004",
-            "storage":990,
+            "storage":5,
             "direct_neighbors":[
                 {
                     "ipPort":"127.0.0.1:5002"
@@ -92,7 +92,7 @@
         },
         {
             "ipPort":"127.0.0.1:5005",
-            "storage":237,
+            "storage":6,
             "direct_neighbors":[
                 {
                     "ipPort":"127.0.0.1:5000"
@@ -113,7 +113,7 @@
         },
         {
             "ipPort":"127.0.0.1:5006",
-            "storage":680,
+            "storage":7,
             "direct_neighbors":[
                 {
                     "ipPort":"127.0.0.1:5004"
@@ -134,7 +134,7 @@
         },
         {
             "ipPort":"127.0.0.1:5007",
-            "storage":996,
+            "storage":8,
             "direct_neighbors":[
                 {
                     "ipPort":"127.0.0.1:5004"
@@ -149,7 +149,7 @@
         },
         {
             "ipPort":"127.0.0.1:5008",
-            "storage":427,
+            "storage":9,
             "direct_neighbors":[
                 {
                     "ipPort":"127.0.0.1:5006"
@@ -164,7 +164,7 @@
         },
         {
             "ipPort":"127.0.0.1:5009",
-            "storage":576,
+            "storage":10,
             "direct_neighbors":[
                 {
                     "ipPort":"127.0.0.1:5001"
